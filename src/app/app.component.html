@@ -1,0 +1,50 @@
+<mat-sidenav-container autosize="true" style="height:100%">
+    <mat-sidenav role="navigation"
+    [mode]="isMobile ? 'over' : 'side'"
+    [opened]="isMobile ? 'false' : 'true'"
+    (mouseenter)="onSinenavMouseEnter()"
+    (mouseleave)="onSinenavMouseLeave()">
+    <mat-nav-list>
+            <!-- TODO: Change these to reusable components. -->
+            <a mat-list-item href="">
+                <span class="entry">
+                    <mat-icon>house</mat-icon>
+                    <span class="spacer"></span>
+                    <span *ngIf="isMobile || !isCollapsed">Home</span>
+                </span>
+            </a>
+            <a mat-list-item href="documents">
+                <span class="entry">
+                    <mat-icon>description</mat-icon>
+                    <span class="spacer"></span>
+                    <span *ngIf="isMobile || !isCollapsed">Documents</span>
+                </span>
+            </a>
+            <a mat-list-item href="links">
+                <span class="entry">
+                    <mat-icon>link</mat-icon>
+                    <span class="spacer"></span>
+                    <span *ngIf="isMobile || !isCollapsed">Links</span>
+                </span>
+            </a>
+            <ng-container *ngIf="isContactMeEnabled">
+                <a mat-list-item href="contact-me">
+                    <span class="entry">
+                        <mat-icon>email</mat-icon>
+                        <span class="spacer"></span>
+                        <span *ngIf="isMobile || !isCollapsed">Contact Me</span>
+                    </span>
+                </a>
+            </ng-container>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar color="primary">
+            <button [hidden]="!isMobile" mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <span>Stephen Humburg</span>
+        </mat-toolbar>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

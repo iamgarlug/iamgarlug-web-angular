@@ -1,0 +1,53 @@
+<mat-card>
+    <mat-card-header class="primary">
+        <mat-card-title>
+            <span class="entry">
+                <mat-icon>email</mat-icon>
+                <span class="spacer"></span>
+                <span>Contact Me</span>
+            </span>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <p>Thank you so much for your interest.</p>
+        <p *ngIf="!isFormEnabled">Unfortunately, I disabled this form due to a large amount of interest.</p>
+        <ng-container *ngIf="isFormEnabled">
+            <form [formGroup]="contactMeForm" (ngSubmit)="sendEmail($event)">
+                <input type="hidden" style="display:false;" id="from_website" name="from_website" formControlName="from_website" value="Angular" />
+                <p>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Name</mat-label>
+                        <input matInput type="text" id="from_name" name="from_name" formControlName="from_name" placeholder="Enter your name." />
+                        <mat-error *ngIf="hasError('from_name', 'required')">Name is required.</mat-error>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Email</mat-label>
+                        <input matInput type="email" id="from_email" name="from_email" formControlName="from_email" placeholder="Enter your email address." />
+                        <mat-error *ngIf="hasError('from_email', 'required')">Email is required.</mat-error>
+                        <mat-error *ngIf="hasError('from_email', 'email')">Email must be valid.</mat-error>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Company</mat-label>
+                        <input matInput type="text" id="from_company" name="from_company" formControlName="from_company" placeholder="Enter the name of your company." />
+                        <mat-error *ngIf="hasError('from_company', 'required')">Company is required.</mat-error>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Message</mat-label>
+                        <textarea matInput id="from_message" name="from_message" formControlName="from_message" placeholder="Enter your message here."></textarea>
+                        <mat-error *ngIf="hasError('from_message', 'required')">Message is required.</mat-error>
+                    </mat-form-field>
+                </p>
+                <button mat-raised-button color="primary" type="submit" [disabled]="!contactMeForm.valid">Send</button>
+                <div>
+                    <sub>PS: Try some invalid field entries to see the form validation work.</sub>
+                </div>
+            </form>
+        </ng-container>
+    </mat-card-content>
+</mat-card>
