@@ -29,7 +29,7 @@ import { environment } from '../environments/environment';
 })
 export class AppComponent implements OnInit {
   isContactMeEnabled = environment.is_contact_me_form_enabled;
-  isCollapsed = false;
+  isExpanded = false;
   isMobile = false;
   title = 'Stephen Humburg';
   @ViewChild(MatSidenav)
@@ -48,20 +48,20 @@ export class AppComponent implements OnInit {
   }
 
   onSinenavMouseEnter() {
-    this.isCollapsed = false;
+    this.isExpanded = true;
   }
 
   onSinenavMouseLeave() {
-    this.isCollapsed = true;
+    this.isExpanded = false;
   }
 
   toggleMenu() {
     if (this.isMobile) {
       this.sidenav.toggle();
-      this.isCollapsed = false;
+      this.isExpanded = true;
     } else {
       this.sidenav.open();
-      this.isCollapsed = !this.isCollapsed;
+      this.isExpanded = !this.isExpanded;
     }
   }
 }
